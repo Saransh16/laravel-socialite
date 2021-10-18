@@ -26,10 +26,7 @@ Route::get('/auth/github/redirect', function () {
     return Socialite::driver('github')->redirect();
 });
 
-Route::get('/auth/github/callback', function () {
-    $user = Socialite::driver('github')->stateless()->user();
-    dd($user);
-});
+Route::get('/auth/github/callback', 'LoginController@login');
 
 Route::get('/', function () {
     return view('welcome');
