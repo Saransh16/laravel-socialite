@@ -32,18 +32,22 @@ class LoginController extends Controller
             // update the provider that might have changed
             $user->update([
                 'provider' => $driver,
-                'provider_id' => $providerUser->id,
-                'access_token' => $providerUser->token
+                'provider_id' => $providerUser->getid(),
+                'provider_token' => $providerUser->token
             ]);
         } else {
             $user = User::create([
                 'name' => $providerUser->getName(),
                 'email' => $providerUser->getEmail(),
                 'provider' => $driver,
-                'provider_id' => $providerUser->getId(),
-                'access_token' => $providerUser->token,
+                'provider_id' => $providerUser->getid(),
+                'provider_token' => $providerUser->token,
             ]);
         }
+
+        dd($user);
+        
+        //login user and redirect to dashboard page
     }
 
     private function isProviderAllowed($driver)
