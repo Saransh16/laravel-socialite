@@ -19,12 +19,12 @@ class LoginController extends Controller
             //return with error message that driver not supported
         }
 
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($driver)->redirect();
     }
 
     public function handleProviderCallback($driver) 
     {
-        $providerUser = Socialite::driver('github')->stateless()->user();
+        $providerUser = Socialite::driver($driver)->stateless()->user();
 
         $user = User::where('email', $providerUser->getEmail())->first();
 
