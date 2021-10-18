@@ -9,7 +9,20 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
-    public function login($driver) 
+    protected $providers = [
+        'github','google'
+    ];
+
+    public function redirectToProvider($driver)
+    {
+        if( ! $this->isProviderAllowed($driver) ) {
+            //return with error message that driver not supported
+        }
+
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function handleProviderCallback($driver) 
     {
         $providerUser = Socialite::driver('github')->stateless()->user();
 
@@ -31,5 +44,10 @@ class LoginController extends Controller
                 'access_token' => $providerUser->token,
             ]);
         }
+    }
+
+    private function isProviderAllowed($driver)
+    {
+        return in_array($driver, $this->providers) && config()->has("services.{$driver}");
     }
 }

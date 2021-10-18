@@ -86,7 +86,7 @@
                     </div>
         
                     <div>
-                        <a href="/auth/github/redirect" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        <a href="{{ route('social.oauth','github') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">Sign in with GitHub</span>
                             <img class="w-5 h-5" src="https://img.icons8.com/ios-glyphs/50/000000/github.png"/>
                         </a>
